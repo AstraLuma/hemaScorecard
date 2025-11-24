@@ -543,25 +543,21 @@ function edit_tournamentName($tournamentID){
 						<option disabled selected> </option>
 					<?php endif ?>
 
-					<option disabled>
-						- Most Popular: ----------------
-					</option>
-
+					<optgroup label="Most Popular">
 					<?php foreach($weaponListPopular as $ID => $name): ?>
 						<option <?=optionValue($ID, @$currentSettings[$tournamentID]['tournamentWeaponID'])?> >
 							<?=$name?>
 						</option>
 					<?php endforeach ?>
+					</optgroup>
 
-					<option disabled>
-						- By Name: ---------------------
-					</option>
-
+					<optgroup label="By Name">
 					<?php foreach($weaponListName as $ID => $name): ?>
 						<option <?=optionValue($ID, @$currentSettings[$tournamentID]['tournamentWeaponID'])?> >
 							<?=$name?>
 						</option>
 					<?php endforeach ?>
+					</optgroup>
 			</select>
 			</div>
 		</td>
@@ -779,17 +775,17 @@ function edit_tournamentRankingType($tournamentID = 0){
 				<option disabled <?=$nullOptionSelected?>></option>
 
 				<?php if($rankingTypesPopular != []): ?>
-					<option disabled>- Most Popular: ----------------</option>
+					<optgroup label="Most Popular">
+					<?php foreach($rankingTypesPopular as $ID => $name):?>
+						<option <?=optionValue($ID, $currentID)?> >
+							<?=$name?>
+						</option>
+					<?php endforeach ?>
+					</optgroup>
 				<?php endif ?>
 
-				<?php foreach($rankingTypesPopular as $ID => $name):?>
-					<option <?=optionValue($ID, $currentID)?> >
-						<?=$name?>
-					</option>
-				<?php endforeach ?>
-
 				<?php if($rankingTypesPopular != []): ?>
-					<option disabled>- By Name: ---------------------</option>
+					<optgroup label="By Name">
 				<?php endif ?>
 
 				<?php foreach($rankingTypes as $ID => $name):?>
@@ -797,6 +793,10 @@ function edit_tournamentRankingType($tournamentID = 0){
 						<?=$name?>
 					</option>
 				<?php endforeach ?>
+
+				<?php if($rankingTypesPopular != []): ?>
+					</optgroup>
+				<?php endif ?>
 			</select>
 			</div>
 

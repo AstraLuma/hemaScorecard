@@ -252,7 +252,7 @@ function edit_formatType(tournamentID){
 				rankingTypes = JSON.parse(this.responseText);
 
 				select = document.getElementById('rankingID_select'+tournamentID);
-				select.length = 0;
+				select.innerHTML = "";
 
 				var option = document.createElement('option');
 				option.value = 0;
@@ -262,29 +262,29 @@ function edit_formatType(tournamentID){
 
 				if(rankingTypes['popular'].length != 0){
 
-					var option = document.createElement('option');
-					option.disabled = true;
-					option.innerHTML = "- Most Popular: ----------------";
-					select.appendChild(option);
+					var popgroup = document.createElement('optgroup');
+					popgroup.label = "Most Popular";
+					select.appendChild(popgroup);
 
 					for(var i in rankingTypes['popular']){
 						var option = document.createElement('option');
 						option.value = rankingTypes['popular'][i]['tournamentRankingID'];
 						option.innerHTML = rankingTypes['popular'][i]['name'];
-						select.appendChild(option);
+						popgroup.appendChild(option);
 					}
 
-					var option = document.createElement('option');
-					option.disabled = true;
-					option.innerHTML = "- By Name: ---------------------";
-					select.appendChild(option);
+					var allgroup = document.createElement('optgroup');
+					allgroup.label = "By Name";
+					select.appendChild(allgroup);
+				} else {
+					var allgroup = select;
 				}
 
 				for(var i in rankingTypes){
 					var option = document.createElement('option');
 					option.value = rankingTypes[i]['tournamentRankingID'];
 					option.innerHTML = rankingTypes[i]['name'];
-					select.appendChild(option);
+					allgroup.appendChild(option);
 				}
 
 				enableTournamentButton(tournamentID);
